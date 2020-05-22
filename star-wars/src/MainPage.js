@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import Header from './Header';
-
 import StarWarsContext from './StarWarsContext'
 
 export default class MainPage extends Component {
@@ -13,13 +11,13 @@ export default class MainPage extends Component {
                 touched: false
             },
             'selected': {
-                value: '',
+                value: 'characters',
                 touched: false
             }
 
         }
     }
-    
+
     static contextType = StarWarsContext;
 
     setSelectedState = (selected) => {
@@ -30,7 +28,7 @@ export default class MainPage extends Component {
             }
         })
     }
-    
+
     setSearchItemState = (searchItem) => {
         this.setState({
             "searchItem": {
@@ -41,16 +39,17 @@ export default class MainPage extends Component {
     }
 
     validateSearchString = () => {
-        if (this.state.searchItem.value && this.state.selected.value) { 
+        if (this.state.searchItem.value && this.state.selected.value) {
             console.log(this.state.selected.value)
             console.log(this.state.searchItem.value)
+            console.log(this.context.characters)
         } else {
             console.log('You must enter search parameters')
         }
     }
 
     render() {
-        
+
         return (
             <>
                 <Header></Header>
@@ -61,8 +60,8 @@ export default class MainPage extends Component {
                         this.validateSearchString()
                     }}>
                         <label htmlFor='optionSelect'>Select a search option</label>
-                        <select id='optionSelect' value='characters'
-                        onChange={e => this.setSelectedState(e.target.value)}>
+                        <select id='optionSelect'
+                            onChange={e => this.setSelectedState(e.target.value)}>
                             <option value='characters'>Characters</option>
                             <option value='planets'>Planets</option>
                             <option value='films'>Films</option>
@@ -71,12 +70,12 @@ export default class MainPage extends Component {
                             <option value='vehicles'>Vehicles</option>
                         </select>
                         <label htmlFor='searchBox'>Enter Search String</label>
-                        <input type='text' id='searchBox' className='searchBox' 
-                        onChange={e => this.setSearchItemState(e.target.value)}
+                        <input type='text' id='searchBox' className='searchBox'
+                            onChange={e => this.setSearchItemState(e.target.value)}
                             value={this.state.searchItem.value}></input>
                         <button className='searchButton'>Search</button>
                     </form>
-                  
+
                 </div>
             </>
         )

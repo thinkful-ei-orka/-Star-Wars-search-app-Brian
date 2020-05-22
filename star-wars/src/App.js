@@ -17,10 +17,6 @@ export default class App extends Component {
       filter: ''
     }
   }
-  validateSearchString = (optionSelected, searchItem) => {
-    console.log('ran')
-    // console.log($("#searchForm input[type='radio']:checked").val())
-  }
 
   componentDidMount() {
 
