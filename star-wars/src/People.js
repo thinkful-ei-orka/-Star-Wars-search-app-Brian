@@ -10,7 +10,8 @@ export default class People extends Component {
     static contextType = StarWarsContext;
     render(){
         console.log(this.context.people)
-        const persons = this.context.people.map((person, index => {
+        const personsArr = this.context.people
+        const persons = personsArr && personsArr.map((person, index) => {
             return (
                 <li key={index}>
                     <p className="char-name"><strong>{person.name}</strong></p>
@@ -22,7 +23,8 @@ export default class People extends Component {
                     <p><strong>Mass:</strong> {person.mass}</p>
                 </li>
             )
-        }))
+        })
+
         return(
             <ul>
                 {persons}

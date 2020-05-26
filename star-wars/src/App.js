@@ -8,18 +8,18 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      people: [],
-      planets: [],
-      films: [],
-      starships: [],
-      species: [],
-      vehicles: [],
-      filter: ''
+      people: []
+      // planets: [],
+      // films: [],
+      // starships: [],
+      // species: [],
+      // vehicles: [],
+      // filter: ''
     }
   }
 
-  mySetState = (searchType, data) => {
-    this.setState({ [searchType]: data })
+  mySetState = (data) => {
+    this.setState({ people: data })
   }
 
   render() {
@@ -29,11 +29,11 @@ export default class App extends Component {
         validateSearchString: this.validateSearchString,
         mySetState: this.mySetState,
         people: this.state.people.results,
-        planets: this.state.planets.results,
-        films: this.state.films.results,
-        starships: this.state.starships.results,
-        species: this.state.species.results,
-        vehicles: this.state.vehicles.results
+        // planets: this.state.planets.results,
+        // films: this.state.films.results,
+        // starships: this.state.starships.results,
+        // species: this.state.species.results,
+        // vehicles: this.state.vehicles.results
       }}>
         
           <MainPage />

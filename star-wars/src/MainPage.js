@@ -43,7 +43,7 @@ export default class MainPage extends Component {
             let searchString = `${this.state.selected.value}/?search=${this.state.searchItem.value}`
             console.log(searchString)
         ApiCalls(searchString)
-            .then((data) => this.context.mySetState(this.state.selected.value, data))
+            .then((data) => this.context.mySetState(data))
             .catch((error) => console.log(error.message));
     }
 
