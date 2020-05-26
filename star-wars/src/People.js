@@ -10,16 +10,16 @@ export default class People extends Component {
     static contextType = StarWarsContext;
     render(){
         console.log(this.context.people)
-        const persons = this.context.people.map((people, index => {
+        const persons = this.context.people.map((person, index => {
             return (
                 <li key={index}>
-                    <p className="char-name"><strong>{people.name}</strong></p>
-                    <p><strong>Gender:</strong> {people.gender}</p>
-                    <p><strong>Eye Color:</strong> {people.eye_color}</p>
-                    <p><strong>hair Color:</strong> {people.hair_color}</p>
-                    <p><strong>Skin Color:</strong> {people.skin_color}</p>
-                    <p><strong>Height:</strong> {people.height}</p>
-                    <p><strong>Mass:</strong> {people.mass}</p>
+                    <p className="char-name"><strong>{person.name}</strong></p>
+                    <p><strong>Gender:</strong> {person.gender}</p>
+                    <p><strong>Eye Color:</strong> {person.eye_color}</p>
+                    <p><strong>hair Color:</strong> {person.hair_color}</p>
+                    <p><strong>Skin Color:</strong> {person.skin_color}</p>
+                    <p><strong>Height:</strong> {person.height}</p>
+                    <p><strong>Mass:</strong> {person.mass}</p>
                 </li>
             )
         }))
