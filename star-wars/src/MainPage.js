@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import StarWarsContext from './StarWarsContext'
+import ApiCalls from './ApiCalls'
 
 export default class MainPage extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export default class MainPage extends Component {
                 touched: false
             },
             'selected': {
-                value: 'characters',
+                value: 'people',
                 touched: false
             }
 
@@ -38,18 +39,29 @@ export default class MainPage extends Component {
         })
     }
 
+    searchForIt =() => {
+            let searchString = `${this.state.selected.value}/?search=${this.state.searchItem.value}`
+            console.log(searchString)
+        ApiCalls(searchString)
+            .then((data) => this.context.mySetState(this.state.selected.value, data))
+            .catch((error) => console.log(error.message));
+    }
+
     validateSearchString = () => {
         if (this.state.searchItem.value && this.state.selected.value) {
-            console.log(this.state.selected.value)
-            console.log(this.state.searchItem.value)
-            console.log(this.context.characters)
+            this.searchForIt()
+            //console.log(this.context.characters)
+            // console.log(this.state.searchItem.value)
+            // console.log(this.context.characters)
         } else {
             console.log('You must enter search parameters')
         }
     }
 
-    render() {
 
+
+    render() {
+        console.log(this.context.people)
         return (
             <>
                 <Header></Header>
@@ -62,7 +74,7 @@ export default class MainPage extends Component {
                         <label htmlFor='optionSelect'>Select a search option</label>
                         <select id='optionSelect'
                             onChange={e => this.setSelectedState(e.target.value)}>
-                            <option value='characters'>Characters</option>
+                            <option value='people'>People</option>
                             <option value='planets'>Planets</option>
                             <option value='films'>Films</option>
                             <option value='starships'>Starships</option>
@@ -75,7 +87,6 @@ export default class MainPage extends Component {
                             value={this.state.searchItem.value}></input>
                         <button className='searchButton'>Search</button>
                     </form>
-
                 </div>
             </>
         )

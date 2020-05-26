@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import MainPage from './MainPage';
 import StarWarsContext from './StarWarsContext';
-import ApiCalls from './ApiCalls'
+import People from './People';
 
 export default class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      characters: [],
+      people: [],
       planets: [],
       films: [],
       starships: [],
@@ -18,41 +18,17 @@ export default class App extends Component {
     }
   }
 
-  componentDidMount() {
-
-    ApiCalls('people')
-      .then((data) => this.setState({ characters: data }))
-      .catch((error) => console.log(error.message));
-
-    ApiCalls('planets')
-      .then((data) => this.setState({ planets: data }))
-      .catch((error) => console.log(error.message));
-
-    ApiCalls('films')
-      .then((data) => this.setState({ films: data }))
-      .catch((error) => console.log(error.message));
-
-    ApiCalls('starships')
-      .then((data) => this.setState({ starships: data }))
-      .catch((error) => console.log(error.message));
-
-    ApiCalls('vehicles')
-      .then((data) => this.setState({ vehicles: data }))
-      .catch((error) => console.log(error.message));
-
-    ApiCalls('species')
-      .then((data) => this.setState({ species: data }))
-      .catch((error) => console.log(error.message));
-    this.setState({ filter: '' })
-
+  mySetState = (searchType, data) => {
+    this.setState({ [searchType]: data })
   }
-  
+
   render() {
-    // console.log(this.state.species.results)
+    
     return (
       <StarWarsContext.Provider value={{
         validateSearchString: this.validateSearchString,
-        characters: this.state.characters.results,
+        mySetState: this.mySetState,
+        people: this.state.people.results,
         planets: this.state.planets.results,
         films: this.state.films.results,
         starships: this.state.starships.results,
@@ -61,7 +37,7 @@ export default class App extends Component {
       }}>
         
           <MainPage />
-          
+          <People />
       </StarWarsContext.Provider>
     );
   }
