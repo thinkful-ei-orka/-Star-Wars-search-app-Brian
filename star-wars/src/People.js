@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-//import MainPage from './MainPage'
 import StarWarsContext from './StarWarsContext';
-import Person from './Person'
 
 export default class People extends Component {
    
-    
-    
     static contextType = StarWarsContext;
     render(){
-        console.log(this.context.people)
         const personsArr = this.context.people
         const persons = personsArr && personsArr.map((person, index) => {
             return (

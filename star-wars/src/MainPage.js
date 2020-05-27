@@ -15,7 +15,6 @@ export default class MainPage extends Component {
                 value: 'people',
                 touched: false
             }
-
         }
     }
 
@@ -43,7 +42,7 @@ export default class MainPage extends Component {
             let searchString = `${this.state.selected.value}/?search=${this.state.searchItem.value}`
             console.log(searchString)
         ApiCalls(searchString)
-            .then((data) => this.context.mySetState(data))
+            .then((data) => this.context.mySetState(this.state.selected.value, data))
             .catch((error) => console.log(error.message));
     }
 
@@ -58,10 +57,33 @@ export default class MainPage extends Component {
         }
     }
 
+    clearResults = () => {
+
+        this.setState({
+            "selected": {
+                value: '',
+                touched: false
+            }
+        })
+
+        this.setState({
+            "searchItem": {
+                value: '',
+                touched: false
+            }
+        })
+
+        this.context.mySetState('people', [])
+        this.context.mySetState('planets', [])
+        this.context.mySetState('films', [])
+        this.context.mySetState('starships', [])
+        this.context.mySetState('species', [])
+        this.context.mySetState('vehicles', [])
+    }
+    
 
 
     render() {
-        console.log(this.context.people)
         return (
             <>
                 <Header></Header>
@@ -86,6 +108,8 @@ export default class MainPage extends Component {
                             onChange={e => this.setSearchItemState(e.target.value)}
                             value={this.state.searchItem.value}></input>
                         <button className='searchButton'>Search</button>
+                        <button className='clearResults' 
+                        onClick={() => this.clearResults()}>Clear Results</button>
                     </form>
                 </div>
             </>
